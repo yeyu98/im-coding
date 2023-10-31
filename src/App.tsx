@@ -1,3 +1,10 @@
+/*
+ * @Author: lzy-Jerry
+ * @Date: 2023-10-31 20:40:08
+ * @LastEditors: lzy-Jerry
+ * @LastEditTime: 2023-10-31 20:56:12
+ * @Description: 
+ */
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -9,9 +16,9 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
+              <a href="https://vitejs.dev" target="_blank">
+              <img src={viteLogo} className="logo" alt="Vite logo" />
+            </a>
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
