@@ -2,13 +2,13 @@
  * @Author: lzy-Jerry
  * @Date: 2023-10-31 20:40:08
  * @LastEditors: lzy-Jerry
- * @LastEditTime: 2023-10-31 21:30:17
+ * @LastEditTime: 2023-11-02 00:14:37
  * @Description:
  */
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import "./App.css";
+import "./App.less";
 
 function App() {
   const [count, setCount] = useState(0);
