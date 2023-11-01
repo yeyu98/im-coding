@@ -31,8 +31,15 @@ body {
 }
 
 html,
-body {
+body,
+#root {
   height: 100%;
+}
+
+#root {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 @media (prefers-color-scheme: light) {
