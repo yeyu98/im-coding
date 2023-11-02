@@ -2,7 +2,7 @@
  * @Author: lzy-Jerry
  * @Date: 2023-11-02 00:29:53
  * @LastEditors: lzy-Jerry
- * @LastEditTime: 2023-11-02 01:33:12
+ * @LastEditTime: 2023-11-02 22:07:37
  * @Description:
 -->
 
@@ -15,7 +15,13 @@
 
 - 什么是shareArray，为什么使用它需要开启跨域隔离？
 - 配置跨域隔离之后打开浏览器出现 net::ERR_CACHE_READ_FAILURE，但开启无痕模式之后有可以正常访问？？
+
   - 猜测是某些文件的缓存有关系
+  - 看了一些<a href="https://github.com/MicrosoftEdge/WebView2Feedback/issues/2457">issue</a>，里面有提到通常会发生在chrome&edge浏览器里面，可能是因为杀毒软件在不知情的情况下清除了缓存导致的；
+  - 目前不太确定是联想电脑管家清除的还是微软电脑管家；
+  - 时好时坏 需要重启一下命令开发的时候 暂时依然无法定位到问题
+
+- WritableStream
 
 # web container
 

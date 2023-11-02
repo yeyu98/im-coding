@@ -13,6 +13,7 @@ specifiers:
   eslint-plugin-prettier: ^5.0.1
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-react-refresh: ^0.4.3
+  immer: ^10.0.3
   less: ^4.2.0
   prettier: ^3.0.3
   react: ^18.2.0
@@ -37,6 +38,7 @@ devDependencies:
   eslint-plugin-prettier: 5.0.1_tdklu2e5wzjzhu3tvwx7hl3jdy
   eslint-plugin-react-hooks: 4.6.0_eslint@8.52.0
   eslint-plugin-react-refresh: 0.4.4_eslint@8.52.0
+  immer: 10.0.3
   less: 4.2.0
   prettier: 3.0.3
   typescript: 5.2.2
@@ -1466,6 +1468,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /immer/10.0.3:
+    resolution: {integrity: sha512-pwupu3eWfouuaowscykeckFmVTpqbzW+rXFCX8rQLkZzM9ftBmU/++Ra+o+L27mz03zJTlyV4UUr+fdKNffo4A==}
+    dev: true
 
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}

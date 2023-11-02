@@ -1,3 +1,10 @@
+/*
+ * @Author: lzy-Jerry
+ * @Date: 2023-11-02 21:59:30
+ * @LastEditors: lzy-Jerry
+ * @LastEditTime: 2023-11-02 22:19:32
+ * @Description:
+ */
 // 这里以express为例，创建一个express运行文件 & package.json
 export const files = {
   "index.js": {
@@ -21,7 +28,7 @@ export const files = {
     file: {
       contents: `
       {
-        "name": "example-app",
+        "name": "express-app",
         "type": "module",
         "dependencies": {
           "express": "latest",
