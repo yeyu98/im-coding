@@ -14,8 +14,19 @@ function CodeEditor(props: Props) {
     webcontainerInstance.current = await WebContainer.boot();
   };
 
-  useEffect(() => {
+  const setFileToEditor = () => {};
+
+  const mainProcess = () => {
     init();
+    setFileToEditor();
+  };
+
+  useEffect(() => {
+    window.addEventListener("load", mainProcess);
+    return () => {
+      window.removeEventListener("load", mainProcess);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
