@@ -1,3 +1,11 @@
+/*
+ * @Author: xiaohu
+ * @Date: 2023-11-02 10:04:00
+ * @LastEditors: xiaohu
+ * @LastEditTime: 2023-11-02 16:03:33
+ * @FilePath: \im-coding\src\components\WebContainer\WebContainer.tsx
+ * @Description:
+ */
 import { useEffect, useRef } from "react";
 import { WebContainer as WebContainerClass } from "@webcontainer/api";
 import "./WebContainer.less";
@@ -11,6 +19,36 @@ function WebContainer(props: Props) {
   const createWebContainerInstance = async () => {
     console.log("createWebContainerInstance");
     webcontainerInstance.current = await WebContainerClass.boot();
+  };
+
+  const loadFile = async () => {
+    /** @type {import('@webcontainer/api').FileSystemTree} */
+
+    const files = {
+      "package.json": {
+        file: {
+          contents: `
+        {
+          "name": "vite-starter",
+          "private": true,
+          "version": "0.0.0",
+          "type": "module",
+          "scripts": {
+            "dev": "vite",
+            "build": "vite build",
+            "preview": "vite preview"
+          },
+          "devDependencies": {
+            "vite": "^4.0.4"
+          }
+        }`,
+        },
+      },
+    };
+
+    await webcontainerInstance.current?.mount(files);
+    const currentFile = await webcontainerInstance.current?.fs.readFile("/package.json", "utf-8");
+    console.log("🚀 ~ file: WebContainer.tsx:51 ~ loadFile ~ currentFile--->>>", currentFile);
   };
 
   const startDevServer = async () => {
@@ -28,6 +66,7 @@ function WebContainer(props: Props) {
 
   useEffect(() => {
     createWebContainerInstance();
+    loadFile();
     startDevServer();
   }, []);
 
