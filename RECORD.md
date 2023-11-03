@@ -22,6 +22,8 @@
   - 时好时坏 需要重启一下命令开发的时候 暂时依然无法定位到问题
 
 - WritableStream
+- 在更新了代码之后iframe没有实时刷新
+  - 因为更新了之后传入给iframe的src并没有改变所以iframe加载的还是原来的缓存内容（可以通过添加时间戳解决）
 
 # web container
 

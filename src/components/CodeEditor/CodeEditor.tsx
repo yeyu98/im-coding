@@ -1,8 +1,8 @@
 /*
  * @Author: lzy-Jerry
  * @Date: 2023-11-02 21:59:30
- * @LastEditors: lzy-Jerry
- * @LastEditTime: 2023-11-03 00:31:59
+ * @LastEditors: xiaohu
+ * @LastEditTime: 2023-11-03 10:30:19
  * @Description:
  */
 import { useEffect, useRef, useState } from "react";
@@ -68,7 +68,8 @@ function CodeEditor(props: Props) {
     webcontainerInstance.current?.on("server-ready", (port: number, url: string) => {
       console.log("~~ 服务启动成功 ~~");
       console.log("✨✨✨ ~ webcontainerInstance.current?.on ~ port--->>>", port);
-      setServerUrl(url);
+      // NOTE iframe 有缓存策略当加载的src不变即使内容改变了依然会走缓存
+      setServerUrl(`${url}?timestamp=${Date.now()}`);
     });
   };
 

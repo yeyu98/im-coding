@@ -2,7 +2,7 @@
  * @Author: xiaohu
  * @Date: 2023-11-02 17:18:49
  * @LastEditors: xiaohu
- * @LastEditTime: 2023-11-02 17:25:40
+ * @LastEditTime: 2023-11-03 10:17:43
  * @FilePath: \im-coding\src\components\CodeEditor\components\Preview\Preview.tsx
  * @Description:
  */
@@ -15,6 +15,7 @@ interface Props {
 
 function Preview(props: Props) {
   const { previewUrl = "" } = props;
+  console.log("更新了", previewUrl);
 
   return (
     <>
