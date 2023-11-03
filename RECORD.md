@@ -2,7 +2,7 @@
  * @Author: lzy-Jerry
  * @Date: 2023-11-02 00:29:53
  * @LastEditors: lzy-Jerry
- * @LastEditTime: 2023-11-02 22:07:37
+ * @LastEditTime: 2023-11-04 01:39:58
  * @Description:
 -->
 
@@ -23,7 +23,10 @@
 
 - WritableStream
 - 在更新了代码之后iframe没有实时刷新
+
   - 因为更新了之后传入给iframe的src并没有改变所以iframe加载的还是原来的缓存内容（可以通过添加时间戳解决）
+
+- React里定义了 useImperativeHandle 之后外层的ref该如何定义类型 & 使用了forwardRef之后又该如何定义组件类型好让className传入？
 
 # web container
 
