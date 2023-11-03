@@ -2,16 +2,18 @@
  * @Author: lzy-Jerry
  * @Date: 2023-11-02 21:59:30
  * @LastEditors: xiaohu
- * @LastEditTime: 2023-11-03 10:30:19
+ * @LastEditTime: 2023-11-03 16:52:35
  * @Description:
  */
 import { useEffect, useRef, useState } from "react";
 import Editor from "./components/Editor/Editor";
 import Preview from "./components/Preview/Preview";
 import { WebContainer } from "@webcontainer/api";
+import { Terminal as TerminalClass } from "xterm";
 import { files } from "./files";
 import { ProcessStatus } from "@/constants";
 import styles from "./CodeEditor.module.less";
+import Terminal from "./components/Terminal/Terminal";
 
 interface Props {}
 const editorContent = files["index.js"].file.contents;
@@ -19,6 +21,7 @@ function CodeEditor(props: Props) {
   const webcontainerInstance = useRef<InstanceType<typeof WebContainer>>();
   const [serverUrl, setServerUrl] = useState<string>("");
   const [editorText, setEditorText] = useState<string>(editorContent);
+  const terminalRef = useRef<HTMLDivElement>();
   // const [terminalOutput, setTerminalOutput] = useState<string>("");
   const {} = props;
 
@@ -82,7 +85,15 @@ function CodeEditor(props: Props) {
     await editFileContent(value);
   };
 
+  const createTerminal = () => {
+    const terminal = new TerminalClass({
+      convertEol: true,
+    });
+    terminal.open(terminalRef.current?.terminalDom);
+  };
+
   const mainProcess = async () => {
+    await createTerminal();
     await init();
     await loadFiles();
     await installDependence();
@@ -105,6 +116,7 @@ function CodeEditor(props: Props) {
         <div className={styles["content"]}>
           <Editor value={editorText} onChange={handleEditorChange} />
           <Preview previewUrl={serverUrl} />
+          <Terminal ref={terminalRef} />
         </div>
       </div>
     </>
