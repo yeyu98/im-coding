@@ -1,8 +1,8 @@
 /*
  * @Author: lzy-Jerry
  * @Date: 2023-11-02 21:59:30
- * @LastEditors: lzy-Jerry
- * @LastEditTime: 2023-11-04 02:04:42
+ * @LastEditors: xiaohu
+ * @LastEditTime: 2023-11-06 11:56:59
  * @Description:
  */
 import { useEffect, useRef, useState } from "react";
@@ -10,8 +10,8 @@ import Editor from "./components/Editor/Editor";
 import Preview from "./components/Preview/Preview";
 import Terminal from "./components/Terminal/Terminal";
 import { WebContainer } from "@webcontainer/api";
-import type { WebContainerProcess } from "@webcontainer/api";
 import { Terminal as TerminalClass } from "xterm";
+import { FitAddon } from "xterm-addon-fit";
 import { files } from "./files";
 import { ProcessStatus } from "@/constants";
 import type { TerminalHandle } from "./components/Terminal/Terminal";
@@ -99,16 +99,30 @@ function CodeEditor(props: Props) {
   };
 
   const createTerminal = () => {
+    const fitAddon = new FitAddon();
     const terminal = new TerminalClass({
       convertEol: true,
     });
+    terminal.loadAddon(fitAddon);
     terminal.open(terminalRef.current!.terminalDom!);
-    return terminal;
+    // 终端自适应
+    fitAddon.fit();
+    return {
+      terminal,
+      fitAddon,
+    };
   };
 
   const startShell = async (terminal: TerminalType) => {
     // jsh：一个带有 WebContainer API 的开箱即用的自定义 shell 命令集合
-    const shellProcess = await webcontainerInstance.current?.spawn("jsh");
+    // process.output是一个可读流
+    // process.input是一个可写流
+    const shellProcess = await webcontainerInstance.current?.spawn("jsh", {
+      terminal: {
+        rows: terminal.rows,
+        cols: terminal.cols,
+      },
+    });
     shellProcess?.output.pipeTo(
       new WritableStream({
         write(data) {
@@ -117,19 +131,28 @@ function CodeEditor(props: Props) {
       }),
     );
 
-    // TODO 这一段略微有点不太理解啥意思
     const input = shellProcess?.input.getWriter();
     terminal.onData((data) => {
       input?.write(data);
     });
+
+    return shellProcess;
   };
 
   const mainProcess = async () => {
-    const terminal = createTerminal();
+    const { terminal, fitAddon } = createTerminal();
     await init();
     await loadFiles();
     listenServer();
-    await startShell(terminal);
+    const shellProcess = await startShell(terminal);
+    window.addEventListener("resize", () => {
+      console.log("尺寸发生了改变");
+      fitAddon.fit();
+      shellProcess?.resize({
+        cols: terminal.cols,
+        rows: terminal.rows,
+      });
+    });
     // await installDependence(terminal);
     // await startDevServer(terminal);
   };
